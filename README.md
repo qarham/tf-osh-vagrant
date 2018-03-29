@@ -114,7 +114,7 @@ Test-02
 ### Download Ubuntu Vagrant Box size 250GB and add to the Vagrant:
 
 Download the Vagrant Box from following link:
-[Vagrant-Ubuntu-1604-250GB-BOX](https://s3-us-west-2.amazonaws.com/vagrant-boxes-250gb/virtualbox-ubuntu1604-250G.box)
+[Vagrant-Ubuntu-1604-250GB-BOX](http://10.84.5.120/cs-shared/images/vagrant-boxes/virtualbox-ubuntu1604-250G.box)
 
 Add Ubuntu Box using following command and check available to use:
 
@@ -124,6 +124,8 @@ k8s-node01> vagrant box add Ubuntu-16.04-250G virtualbox-ubuntu1604-250G.box
 k8s-node01>  vagrant box list
 Ubuntu-16.04-250G                       (virtualbox, 0)
 ```
+
+***Note:*** If you want to use different VM hostname & IP addresses then please make changes in [provision-osh-helm.sh](scripts/provision-osh-helm.sh) & [provision-tp-parent-chart-helm.sh](scripts/provision-tp-parent-chart-helm.sh) as needed.
 
 ### Reference
 
