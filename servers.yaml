@@ -20,9 +20,3 @@
   ip-mgmt: 10.13.82.239
   ip-control-data: 192.168.1.239
 
-- name: k8s-node04
-  box: Ubuntu-16.04-250G
-  ram: 32768
-  cpus: 8
-  ip-mgmt: 10.13.82.240
-  ip-control-data: 192.168.1.240
