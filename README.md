@@ -88,12 +88,12 @@ k8s-node01> helm ls
 6. Now clsuter is ready for basic testing use following steps for Virtual Network and Virtual Machine creation.
 
 ```bash
-(k8s-node01)> export OS_CLOUD=openstack_helm
+k8s-node01> export OS_CLOUD=openstack_helm
 
-(k8s-node01)> openstack network create MGMT-VN
-(k8s-node01)> openstack subnet create --subnet-range 172.16.1.0/24 --network MGMT-VN MGMT-VN-subnet
+k8s-node01> openstack network create MGMT-VN
+k8s-node01> openstack subnet create --subnet-range 172.16.1.0/24 --network MGMT-VN MGMT-VN-subnet
 
-(k8s-node01)> openstack server create --flavor m1.tiny --image 'Cirros 0.3.5 64-bit' \
+k8s-node01> openstack server create --flavor m1.tiny --image 'Cirros 0.3.5 64-bit' \
 --nic net-id=MGMT-VN \
 Test-01
 
@@ -101,7 +101,6 @@ Test-01
 --nic net-id=MGMT-VN \
 Test-02
 ```
-  
 
 ### Reference
 
