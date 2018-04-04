@@ -124,7 +124,6 @@ global:
     CLOUD_ORCHESTRATOR: openstack 
     AAA_MODE: cloud-admin 
     BGP_PORT: $BGP_PORT
-    CONTROL_DATA_NET_LIST: ${CONTROL_DATA_NET_LIST}
     VROUTER_GATEWAY: ${VROUTER_GATEWAY}
 
 # section of vrouter template for kernel mode
@@ -134,6 +133,7 @@ global:
 
 # section of vrouter template for dpdk mode
   contrail_env_vrouter_dpdk:
+    CONTROL_DATA_NET_LIST: ${CONTROL_DATA_NET_LIST}
     DPDK_MEM_PER_SOCKET: 1024
     PHYSICAL_INTERFACE: bond0
     #PHYSICAL_INTERFACE: bond0
