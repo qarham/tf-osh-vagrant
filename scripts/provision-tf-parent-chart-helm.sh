@@ -6,6 +6,11 @@ export OSH_PATH=${BASE_DIR}/openstack-helm
 export OSH_INFRA_PATH=${BASE_DIR}/openstack-helm-infra
 export CHD_PATH=${BASE_DIR}/contrail-helm-deployer
 
+## By Defualt latest OpenContrailNightly iamges will be used please change "laetst" to "ocata-master-XX" for specific release
+export CONTRAIL_REGISTRY=opencontrailnightly
+export CONTAINER_TAG=latest
+
+
 ### Define Nodes names for K8s Labeling "opencontrail.org/controller", "opencontrail.org/vrouter-kernel" & "opencontrail.org/vrouter-dpdk"  #######
 export CONTRAIL_CONTROLLER_NODE_01=k8s-node01
 export CONTRAIL_CONTROLLER_NODE_02=k8s-node02
@@ -80,32 +85,32 @@ global:
   # section to configure images for all containers
   images:
     tags:
-      kafka: "docker.io/opencontrailnightly/contrail-external-kafka:ocata-master-38"
-      cassandra: "docker.io/opencontrailnightly/contrail-external-cassandra:ocata-master-38"
+      kafka: "docker.io/opencontrailnightly/contrail-external-kafka:${CONTAINER_TAG}"
+      cassandra: "docker.io/opencontrailnightly/contrail-external-cassandra:${CONTAINER_TAG}"
       redis: "redis:4.0.2"
-      zookeeper: "docker.io/opencontrailnightly/contrail-external-zookeeper:ocata-master-38"
-      contrail_control: "docker.io/opencontrailnightly/contrail-controller-control-control:ocata-master-38"
-      control_dns: "docker.io/opencontrailnightly/contrail-controller-control-dns:ocata-master-38"
-      control_named: "docker.io/opencontrailnightly/contrail-controller-control-named:ocata-master-38"
-      config_api: "docker.io/opencontrailnightly/contrail-controller-config-api:ocata-master-38"
-      config_devicemgr: "docker.io/opencontrailnightly/contrail-controller-config-devicemgr:ocata-master-38"
-      config_schema_transformer: "docker.io/opencontrailnightly/contrail-controller-config-schema:ocata-master-38"
-      config_svcmonitor: "docker.io/opencontrailnightly/contrail-controller-config-svcmonitor:ocata-master-38"
-      webui_middleware: "docker.io/opencontrailnightly/contrail-controller-webui-job:ocata-master-38"
-      webui: "docker.io/opencontrailnightly/contrail-controller-webui-web:ocata-master-38"
-      analytics_api: "docker.io/opencontrailnightly/contrail-analytics-api:ocata-master-38"
-      contrail_collector: "docker.io/opencontrailnightly/contrail-analytics-collector:ocata-master-38"
-      analytics_alarm_gen: "docker.io/opencontrailnightly/contrail-analytics-alarm-gen:ocata-master-38"
-      analytics_query_engine: "docker.io/opencontrailnightly/contrail-analytics-query-engine:ocata-master-38"
-      analytics_snmp_collector: "docker.io/opencontrailnightly/contrail-analytics-snmp-collector:ocata-master-38"
-      contrail_topology: "docker.io/opencontrailnightly/contrail-analytics-topology:ocata-master-38"
-      build_driver_init: "docker.io/opencontrailnightly/contrail-vrouter-kernel-build-init:ocata-master-38"
-      vrouter_agent: "docker.io/opencontrailnightly/contrail-vrouter-agent:ocata-master-38"
-      vrouter_init_kernel: "docker.io/opencontrailnightly/contrail-vrouter-kernel-init:ocata-master-38"
-      vrouter_dpdk: "docker.io/opencontrailnightly/contrail-vrouter-agent-dpdk:ocata-master-38"
-      vrouter_init_dpdk: "docker.io/opencontrailnightly/contrail-vrouter-kernel-init-dpdk:ocata-master-38"
-      dpdk_watchdog: "docker.io/opencontrailnightly/contrail-vrouter-net-watchdog:ocata-master-38"
-      nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:ocata-master-38"
+      zookeeper: "docker.io/opencontrailnightly/contrail-external-zookeeper:${CONTAINER_TAG}"
+      contrail_control: "docker.io/opencontrailnightly/contrail-controller-control-control:${CONTAINER_TAG}"
+      control_dns: "docker.io/opencontrailnightly/contrail-controller-control-dns:${CONTAINER_TAG}"
+      control_named: "docker.io/opencontrailnightly/contrail-controller-control-named:${CONTAINER_TAG}"
+      config_api: "docker.io/opencontrailnightly/contrail-controller-config-api:${CONTAINER_TAG}"
+      config_devicemgr: "docker.io/opencontrailnightly/contrail-controller-config-devicemgr:${CONTAINER_TAG}"
+      config_schema_transformer: "docker.io/opencontrailnightly/contrail-controller-config-schema:${CONTAINER_TAG}"
+      config_svcmonitor: "docker.io/opencontrailnightly/contrail-controller-config-svcmonitor:${CONTAINER_TAG}"
+      webui_middleware: "docker.io/opencontrailnightly/contrail-controller-webui-job:${CONTAINER_TAG}"
+      webui: "docker.io/opencontrailnightly/contrail-controller-webui-web:${CONTAINER_TAG}"
+      analytics_api: "docker.io/opencontrailnightly/contrail-analytics-api:${CONTAINER_TAG}"
+      contrail_collector: "docker.io/opencontrailnightly/contrail-analytics-collector:${CONTAINER_TAG}"
+      analytics_alarm_gen: "docker.io/opencontrailnightly/contrail-analytics-alarm-gen:${CONTAINER_TAG}"
+      analytics_query_engine: "docker.io/opencontrailnightly/contrail-analytics-query-engine:${CONTAINER_TAG}"
+      analytics_snmp_collector: "docker.io/opencontrailnightly/contrail-analytics-snmp-collector:${CONTAINER_TAG}"
+      contrail_topology: "docker.io/opencontrailnightly/contrail-analytics-topology:${CONTAINER_TAG}"
+      build_driver_init: "docker.io/opencontrailnightly/contrail-vrouter-kernel-build-init:${CONTAINER_TAG}"
+      vrouter_agent: "docker.io/opencontrailnightly/contrail-vrouter-agent:${CONTAINER_TAG}"
+      vrouter_init_kernel: "docker.io/opencontrailnightly/contrail-vrouter-kernel-init:${CONTAINER_TAG}"
+      vrouter_dpdk: "docker.io/opencontrailnightly/contrail-vrouter-agent-dpdk:${CONTAINER_TAG}"
+      vrouter_init_dpdk: "docker.io/opencontrailnightly/contrail-vrouter-kernel-init-dpdk:${CONTAINER_TAG}"
+      dpdk_watchdog: "docker.io/opencontrailnightly/contrail-vrouter-net-watchdog:${CONTAINER_TAG}"
+      nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:${CONTAINER_TAG}"
       dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.2.1
     imagePullPolicy: "IfNotPresent"
 
@@ -125,6 +130,7 @@ global:
 # section of vrouter template for kernel mode
   contrail_env_vrouter_kernel:
     AGENT_MODE: ${AGENT_MODE_KERNEL}
+    CONTROL_DATA_NET_LIST: ${CONTROL_DATA_NET_LIST}
 
 # section of vrouter template for dpdk mode
   contrail_env_vrouter_dpdk:

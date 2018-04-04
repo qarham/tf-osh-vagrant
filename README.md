@@ -17,7 +17,7 @@
 
 ![Web Console](images/TF-Vagrant-Topology-3-Nodes.png)
 
-1. Prepare Ubuntu 16.0.4.3 Host and install git, vagrant, ansible and virtulabox.
+1. Prepare Ubuntu 16.04.3 Host and install git, vagrant, ansible and virtualbox.
 
 2. Also install linux bridge utility and configure bridge as per above diagram. Here is how it looks in my setup:
 

@@ -1,22 +1,21 @@
 ---
 - name: k8s-node01
-  box: Ubuntu-16.04-250G
+  box: qarham/ubuntu-1604-250G
   ram: 32768
   cpus: 4
   ip-mgmt: 10.13.82.237
   ip-control-data: 192.168.1.237
 
 - name: k8s-node02
-  box: Ubuntu-16.04-250G
+  box: qarham/ubuntu-1604-250G
   ram: 32768
   cpus: 4
   ip-mgmt: 10.13.82.238
   ip-control-data: 192.168.1.238
 
 - name: k8s-node03
-  box: Ubuntu-16.04-250G
+  box: qarham/ubuntu-1604-250G
   ram: 32768
   cpus: 4
   ip-mgmt: 10.13.82.239
   ip-control-data: 192.168.1.239
-
