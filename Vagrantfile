@@ -32,8 +32,8 @@ if Vagrant.has_plugin?("vagrant-timezone")
       srv.vm.provision "shell", path: "scripts/ntp.sh" 
       srv.vm.provision "shell", path: "scripts/enable_root_login.sh"
       srv.vm.hostname = servers ["name"]
-      srv.hostmanager.enabled = true
-      srv.hostmanager.manage_host = true
+#      srv.hostmanager.enabled = true
+#      srv.hostmanager.manage_host = true
       srv.vm.provider :virtualbox do |vb|
         vb.name = servers["name"]
         vb.memory = servers["ram"]
@@ -52,7 +52,7 @@ if Vagrant.has_plugin?("vagrant-timezone")
     end
     config.vm.define "k8s-node01" do |web|
       web.vm.provision "TF-Install", run: "never", type:  "shell", 
-        path: "scripts/provision-tp-parent-chart-helm.sh"
+        path: "scripts/provision-tf-parent-chart-helm.sh"
     end
     config.vm.define "k8s-node01" do |web|
       web.vm.provision "Test-VN-VM", run: "never", type:  "shell", 

@@ -113,6 +113,7 @@ cd ${OSH_PATH}
 ./tools/deployment/multinode/090-ceph-radosgateway.sh
 ./tools/deployment/multinode/100-glance.sh
 ./tools/deployment/multinode/110-cinder.sh
+./tools/deployment/developer/common/100-horizon.sh
 ./tools/deployment/multinode/131-libvirt-opencontrail.sh
 ./tools/deployment/multinode/141-compute-kit-opencontrail.sh
 
