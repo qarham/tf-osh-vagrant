@@ -37,7 +37,8 @@ host-bms> cd tf-osh-vagrant
 host-bms> vagrant status
 ```
 
-***Note:1***: Want to change VM, Box names and IP addresses edit following file as needed:
+***Note:1***: Want to change VM, Box names and IP addresses edit following file as needed.
+
 ***Note:2*** If you want to use different VM hostname & IP addresses then please make changes in [provision-osh-helm.sh](scripts/provision-osh-helm.sh) & [provision-tp-parent-chart-helm.sh](scripts/provision-tp-parent-chart-helm.sh) as needed.
 
 ```bash
@@ -125,8 +126,6 @@ k8s-node01> vagrant box add Ubuntu-16.04-250G virtualbox-ubuntu1604-250G.box
 k8s-node01>  vagrant box list
 Ubuntu-16.04-250G                       (virtualbox, 0)
 ```
-
-
 
 ### Reference
 
