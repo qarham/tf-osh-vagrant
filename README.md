@@ -37,7 +37,8 @@ host-bms> cd tf-osh-vagrant
 host-bms> vagrant status
 ```
 
-***Note***: Want to change VM, Box names and IP addresses edit following file as needed:
+***Note:1***: Want to change VM, Box names and IP addresses edit following file as needed:
+***Note:2*** If you want to use different VM hostname & IP addresses then please make changes in [provision-osh-helm.sh](scripts/provision-osh-helm.sh) & [provision-tp-parent-chart-helm.sh](scripts/provision-tp-parent-chart-helm.sh) as needed.
 
 ```bash
 host-bms> cat servers.yaml
@@ -80,9 +81,9 @@ host-bms> vagrant provision --provision-with TF-Install
 5. Once all above commands are sucessful without any ***"error"*** check status of the pods by connecting to "ks8-node01"
 
 ```bash
-k8s-node01> kubectle get pods -n ceph
-k8s-node01> kubectle get pods -n openstack
-k8s-node01> kubectle get pods -n contrail
+k8s-node01> kubectl get pods -n ceph
+k8s-node01> kubectl get pods -n openstack
+k8s-node01> kubectl get pods -n contrail
 
 & Helm
 k8s-node01> helm ls
@@ -125,7 +126,7 @@ k8s-node01>  vagrant box list
 Ubuntu-16.04-250G                       (virtualbox, 0)
 ```
 
-***Note:*** If you want to use different VM hostname & IP addresses then please make changes in [provision-osh-helm.sh](scripts/provision-osh-helm.sh) & [provision-tp-parent-chart-helm.sh](scripts/provision-tp-parent-chart-helm.sh) as needed.
+
 
 ### Reference
 
