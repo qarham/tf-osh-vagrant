@@ -177,4 +177,14 @@ echo ************** Installing OpenStack Heat with Contrail Heat Resoruces *****
 cd ${OSH_PATH}
 ./tools/deployment/multinode/151-heat-opencontrail.sh
 
+
+echo ****************** Monitoring Software Installation ********
+# Weavescope will create a separate Namespace called "weave" and use NodePort use "kubectl get svc -n weave" for NodePort number
+#kubectl apply -f "https://cloud.weave.works/k8s/scope.yaml?k8s-service-type=NodePort&k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+# Promethus and Grafana will create a new Namespace "monitoring" and for GUI access NodePort is used. Please use following command to get NodePort info "kubectl get svnc -n monitoring"
+
+#kubectl apply \
+#  --filename https://raw.githubusercontent.com/giantswarm/kubernetes-prometheus/master/manifests-all.yaml
+
 echo ****************** Contrail Helm Installation is sucessful *************************

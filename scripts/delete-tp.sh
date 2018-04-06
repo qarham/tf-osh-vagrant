@@ -7,6 +7,7 @@ helm delete --purge ingress-contrail
 
 kubectl get pods -n contrail -o wide
 
+echo "Waiting for the Contrail Networking to clean up"
 sleep 120
 
 kubectl get pods -n contrail -o wide
