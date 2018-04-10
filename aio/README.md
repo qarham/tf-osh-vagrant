@@ -59,7 +59,7 @@ Test-02
 
 ### AIO TF OSH Quick demo:
 
-[![asciicast](https://asciinema.org/a/aVpnSyNGDmNRwn8VrSWkEUWKA.png)](https://asciinema.org/a/aVpnSyNGDmNRwn8VrSWkEUWKA)
+[![asciicast](https://asciinema.org/a/Vycho1p5Y0y34VIn7FthblL76.png)](https://asciinema.org/a/Vycho1p5Y0y34VIn7FthblL76)
 
 ### Reference
 

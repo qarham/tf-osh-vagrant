@@ -19,13 +19,6 @@ cd ${OSH_PATH}
 ./tools/deployment/developer/common/001-install-packages-opencontrail.sh
 ./tools/deployment/developer/common/010-deploy-k8s.sh
 
-#Get Phyical Interface IP with DefaulT GW to be used in Config, Get CONTROLLER & CONTROL NODE IP 
-export PHYSIICAL_INTERFACE="$(sudo ip -4 route list 0/0 | awk '{ print $5; exit }')"
-export INTERFACE_IP_ADDRESS="$(ip addr show dev $PHYSIICAL_INTERFACE | grep "inet .*/.* brd " | awk '{print $2}' | cut -d '/' -f 1)"
-export CONTROLLER_NODE="$(kubectl get pods -n kube-system -o wide | awk 'FNR ==2 {print $6; exit}')"
-export CONTROL_NODE=$INTERFACE_IP_ADDRESS
-export DEFAULT_GATEWAY="$(sudo ip -4 route list 0/0 | awk '{ print $3; exit }')"
-
 #Install openstack and heat client
 ./tools/deployment/developer/common/020-setup-client.sh
 
@@ -51,6 +44,13 @@ kubectl label node opencontrail.org/vrouter-kernel=enabled --all
 
 #Give cluster-admin permission for the user to create contrail pods
 kubectl replace -f rbac/cluster-admin.yaml
+
+#Get Phyical Interface IP with DefaulT GW to be used in Config, Get CONTROLLER & CONTROL NODE IP 
+export PHYSIICAL_INTERFACE="$(sudo ip -4 route list 0/0 | awk '{ print $5; exit }')"
+export INTERFACE_IP_ADDRESS="$(ip addr show dev $PHYSIICAL_INTERFACE | grep "inet .*/.* brd " | awk '{print $2}' | cut -d '/' -f 1)"
+export CONTROLLER_NODE="$(kubectl get pods -n kube-system -o wide | awk 'FNR ==2 {print $6; exit}')"
+export CONTROL_NODE=$INTERFACE_IP_ADDRESS
+export DEFAULT_GATEWAY="$(sudo ip -4 route list 0/0 | awk '{ print $3; exit }')"
 
 #Populate the contrail-override-values.yaml file
 cat > /tmp/contrail.yaml << EOF
