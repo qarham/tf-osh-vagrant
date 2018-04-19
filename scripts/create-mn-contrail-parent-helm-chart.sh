@@ -7,8 +7,8 @@ export OSH_INFRA_PATH=${BASE_DIR}/openstack-helm-infra
 export CHD_PATH=${BASE_DIR}/contrail-helm-deployer
 
 ## By Defualt latest OpenContrailNightly iamges will be used please change "laetst" to "ocata-master-XX" for specific release
-export CONTRAIL_REGISTRY=docker.io/opencontrailnightly
-export CONTAINER_TAG=latest
+export CONTRAIL_REGISTRY=10.84.5.81:5000
+export CONTAINER_TAG=ocata-5.0-16
 
 
 ### Define Nodes names for K8s Labeling "opencontrail.org/controller", "opencontrail.org/vrouter-kernel" & "opencontrail.org/vrouter-dpdk"  #######
@@ -42,33 +42,11 @@ export BGP_PORT=1179
 export AGENT_MODE_KERNEL=nic
 
 ### vRouter DPDK Config Values #######
-export DPDK_PHYSICAL_INTERFACE=enp0s9
 export CPU_CORE_MASK="0xff"
 export DPDK_UIO_DRIVER=uio_pci_generic
 export HUGE_PAGES=49000
 export AGENT_MODE_DPDK=dpdk
 export HUGE_PAGES_DIR=/hugepages
-
-################## Installastion of Contrail Helm Charts ##############################
-cd ${CHD_PATH}
-make
-
-kubectl replace -f ${CHD_PATH}/rbac/cluster-admin.yaml
-
-############## Label Contrail Nodes ###################################
-kubectl label node ${CONTRAIL_COMPUTE_KERNEL_01} ${CONTRAIL_COMPUTE_KERNEL_02} opencontrail.org/vrouter-kernel=enabled
-#kubectl label node ${CONTRAIL_COMPUTE_DPDK_01} opencontrail.org/vrouter-dpdk=enabled
-kubectl label nodes ${CONTRAIL_CONTROLLER_NODE_01} ${CONTRAIL_CONTROLLER_NODE_02} ${CONTRAIL_CONTROLLER_NODE_03} opencontrail.org/controller=enabled
-
-echo "**********  Contrail Controller Nodes  ***************\n"
-kubectl get nodes -o wide -l opencontrail.org/controller=enabled
-
-echo "**********  Contrail Compute Nodes with vrouter-kernel ***************\n"
-kubectl get nodes -o wide -l opencontrail.org/vrouter-kernel=enabled
-
-echo "**********  Contrail Compute Nodes with vrouter-dpdk ***************\n"
-kubectl get nodes -o wide -l opencontrail.org/vrouter-dpdk=enabled
-
 
 #### contrail chart Global Env Setting ########
 cat > /var/tmp/contrail-controllers << EOF
@@ -136,7 +114,7 @@ global:
   contrail_env_vrouter_dpdk:
     CONTROL_DATA_NET_LIST: ${CONTROL_DATA_NET_LIST}
     DPDK_MEM_PER_SOCKET: 1024
-    PHYSICAL_INTERFACE: ${DPDK_PHYSICAL_INTERFACE}
+    PHYSICAL_INTERFACE: enp0s9
     #PHYSICAL_INTERFACE: bond0
     #PHYSICAL_INTERFACE: p3p1
     CPU_CORE_MASK: "$CPU_CORE_MASK"
@@ -156,36 +134,3 @@ contrail-vrouter:
     configmap_vrouter_dpdk: true
     daemonset_dpdk: true
 EOF
-
-############## Use this section if you would like to install each Contrail Chart separately using "values.yaml" file #######
-#helm install --name contrail-thirdparty ./contrail-thirdparty --namespace=contrail --values /tmp/contrail-thirdparty.yaml
-#helm install --name contrail-controller ./contrail-controller --namespace=openstack --values /tmp/contrail-controller.yaml
-#helm install --name contrail-analytics ./contrail-analytics --namespace=openstack --values /tmp/contrail-analytics.yaml
-#helm install --name contrail-vrouter ./contrail-vrouter --namespace=openstack --values /tmp/contrail-vrouter.yaml
-
-echo ************* Deployment of Contrail Parent Helm Chart ***************************
-cd ${CHD_PATH}
-helm install --name contrail ${CHD_PATH}/contrail --namespace=contrail --values=/tmp/contrail.yaml
-cd ${OSH_PATH}
-./tools/deployment/common/wait-for-pods.sh openstack 1200
-echo 3 | sudo tee /proc/sys/vm/drop_caches
-read -p "Clear cache on other nodes. Press y to continue or n to abort [y/n] : " yn
-case $yn in
-    [Nn]* ) echo "Aborting...."; exit;;
-esac
-
-echo ************** Installing OpenStack Heat with Contrail Heat Resoruces ****************
-cd ${OSH_PATH}
-./tools/deployment/multinode/151-heat-opencontrail.sh
-
-
-echo ****************** Monitoring Software Installation ********
-# Weavescope will create a separate Namespace called "weave" and use NodePort use "kubectl get svc -n weave" for NodePort number
-#kubectl apply -f "https://cloud.weave.works/k8s/scope.yaml?k8s-service-type=NodePort&k8s-version=$(kubectl version | base64 | tr -d '\n')"
-
-# Promethus and Grafana will create a new Namespace "monitoring" and for GUI access NodePort is used. Please use following command to get NodePort info "kubectl get svnc -n monitoring"
-
-#kubectl apply \
-#  --filename https://raw.githubusercontent.com/giantswarm/kubernetes-prometheus/master/manifests-all.yaml
-
-echo ****************** Contrail Helm Installation is sucessful *************************

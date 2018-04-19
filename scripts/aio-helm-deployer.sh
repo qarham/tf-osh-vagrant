@@ -12,7 +12,7 @@ export OSH_PATH=${BASE_DIR}/openstack-helm
 export OSH_INFRA_PATH=${BASE_DIR}/openstack-helm-infra
 export CHD_PATH=${BASE_DIR}/contrail-helm-deployer
 
-export CONTRAIL_REGISTRY=opencontrailnightly
+export CONTRAIL_REGISTRY=docker.io/opencontrailnightly
 export CONTAINER_TAG=ocata-master-49
 
 cd ${OSH_PATH}
@@ -60,32 +60,32 @@ global:
   # section to configure images for all containers
   images:
     tags:
-      kafka: "docker.io/opencontrailnightly/contrail-external-kafka:${CONTAINER_TAG}"
-      cassandra: "docker.io/opencontrailnightly/contrail-external-cassandra:${CONTAINER_TAG}"
+      kafka: "${CONTRAIL_REGISTRY}/contrail-external-kafka:${CONTAINER_TAG}"
+      cassandra: "${CONTRAIL_REGISTRY}/contrail-external-cassandra:${CONTAINER_TAG}"
       redis: "redis:4.0.2"
-      zookeeper: "docker.io/opencontrailnightly/contrail-external-zookeeper:${CONTAINER_TAG}"
-      contrail_control: "docker.io/opencontrailnightly/contrail-controller-control-control:${CONTAINER_TAG}"
-      control_dns: "docker.io/opencontrailnightly/contrail-controller-control-dns:${CONTAINER_TAG}"
-      control_named: "docker.io/opencontrailnightly/contrail-controller-control-named:${CONTAINER_TAG}"
-      config_api: "docker.io/opencontrailnightly/contrail-controller-config-api:${CONTAINER_TAG}"
-      config_devicemgr: "docker.io/opencontrailnightly/contrail-controller-config-devicemgr:${CONTAINER_TAG}"
-      config_schema_transformer: "docker.io/opencontrailnightly/contrail-controller-config-schema:${CONTAINER_TAG}"
-      config_svcmonitor: "docker.io/opencontrailnightly/contrail-controller-config-svcmonitor:${CONTAINER_TAG}"
-      webui_middleware: "docker.io/opencontrailnightly/contrail-controller-webui-job:${CONTAINER_TAG}"
-      webui: "docker.io/opencontrailnightly/contrail-controller-webui-web:${CONTAINER_TAG}"
-      analytics_api: "docker.io/opencontrailnightly/contrail-analytics-api:${CONTAINER_TAG}"
-      contrail_collector: "docker.io/opencontrailnightly/contrail-analytics-collector:${CONTAINER_TAG}"
-      analytics_alarm_gen: "docker.io/opencontrailnightly/contrail-analytics-alarm-gen:${CONTAINER_TAG}"
-      analytics_query_engine: "docker.io/opencontrailnightly/contrail-analytics-query-engine:${CONTAINER_TAG}"
-      analytics_snmp_collector: "docker.io/opencontrailnightly/contrail-analytics-snmp-collector:${CONTAINER_TAG}"
-      contrail_topology: "docker.io/opencontrailnightly/contrail-analytics-topology:${CONTAINER_TAG}"
-      build_driver_init: "docker.io/opencontrailnightly/contrail-vrouter-kernel-build-init:${CONTAINER_TAG}"
-      vrouter_agent: "docker.io/opencontrailnightly/contrail-vrouter-agent:${CONTAINER_TAG}"
-      vrouter_init_kernel: "docker.io/opencontrailnightly/contrail-vrouter-kernel-init:${CONTAINER_TAG}"
-      vrouter_dpdk: "docker.io/opencontrailnightly/contrail-vrouter-agent-dpdk:${CONTAINER_TAG}"
-      vrouter_init_dpdk: "docker.io/opencontrailnightly/contrail-vrouter-kernel-init-dpdk:${CONTAINER_TAG}"
-      dpdk_watchdog: "docker.io/opencontrailnightly/contrail-vrouter-net-watchdog:${CONTAINER_TAG}"
-      nodemgr: "docker.io/opencontrailnightly/contrail-nodemgr:${CONTAINER_TAG}"
+      zookeeper: "${CONTRAIL_REGISTRY}/contrail-external-zookeeper:${CONTAINER_TAG}"
+      contrail_control: "${CONTRAIL_REGISTRY}/contrail-controller-control-control:${CONTAINER_TAG}"
+      control_dns: "${CONTRAIL_REGISTRY}/contrail-controller-control-dns:${CONTAINER_TAG}"
+      control_named: "${CONTRAIL_REGISTRY}/contrail-controller-control-named:${CONTAINER_TAG}"
+      config_api: "${CONTRAIL_REGISTRY}/contrail-controller-config-api:${CONTAINER_TAG}"
+      config_devicemgr: "${CONTRAIL_REGISTRY}/contrail-controller-config-devicemgr:${CONTAINER_TAG}"
+      config_schema_transformer: "${CONTRAIL_REGISTRY}/contrail-controller-config-schema:${CONTAINER_TAG}"
+      config_svcmonitor: "${CONTRAIL_REGISTRY}/contrail-controller-config-svcmonitor:${CONTAINER_TAG}"
+      webui_middleware: "${CONTRAIL_REGISTRY}/contrail-controller-webui-job:${CONTAINER_TAG}"
+      webui: "${CONTRAIL_REGISTRY}/contrail-controller-webui-web:${CONTAINER_TAG}"
+      analytics_api: "${CONTRAIL_REGISTRY}/contrail-analytics-api:${CONTAINER_TAG}"
+      contrail_collector: "${CONTRAIL_REGISTRY}/contrail-analytics-collector:${CONTAINER_TAG}"
+      analytics_alarm_gen: "${CONTRAIL_REGISTRY}/contrail-analytics-alarm-gen:${CONTAINER_TAG}"
+      analytics_query_engine: "${CONTRAIL_REGISTRY}/contrail-analytics-query-engine:${CONTAINER_TAG}"
+      analytics_snmp_collector: "${CONTRAIL_REGISTRY}/contrail-analytics-snmp-collector:${CONTAINER_TAG}"
+      contrail_topology: "${CONTRAIL_REGISTRY}/contrail-analytics-topology:${CONTAINER_TAG}"
+      build_driver_init: "${CONTRAIL_REGISTRY}/contrail-vrouter-kernel-build-init:${CONTAINER_TAG}"
+      vrouter_agent: "${CONTRAIL_REGISTRY}/contrail-vrouter-agent:${CONTAINER_TAG}"
+      vrouter_init_kernel: "${CONTRAIL_REGISTRY}/contrail-vrouter-kernel-init:${CONTAINER_TAG}"
+      vrouter_dpdk: "${CONTRAIL_REGISTRY}/contrail-vrouter-agent-dpdk:${CONTAINER_TAG}"
+      vrouter_init_dpdk: "${CONTRAIL_REGISTRY}/contrail-vrouter-kernel-init-dpdk:${CONTAINER_TAG}"
+      dpdk_watchdog: "${CONTRAIL_REGISTRY}/contrail-vrouter-net-watchdog:${CONTAINER_TAG}"
+      nodemgr: "${CONTRAIL_REGISTRY}/contrail-nodemgr:${CONTAINER_TAG}"
       dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.2.1
     imagePullPolicy: "IfNotPresent"
 

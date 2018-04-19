@@ -1,32 +1,17 @@
-#!/bin/bash -v 
-
-export BASE_DIR=/opt
-export OSH_PATH=${BASE_DIR}/openstack-helm
-export OSH_INFRA_PATH=${BASE_DIR}/openstack-helm-infra
-export CHD_PATH=${BASE_DIR}/contrail-helm-deployer
+#!/bin/bash
+set -ex
 
 export CONTRAIL_REGISTRY=docker.io/opencontrailnightly
-export CONTAINER_TAG=ocata-master-53
+export CONTAINER_TAG=ocata-master-49
 
-#Get Phyical Interface IP with DefaulT GW to be used in Config, Get CONTROLLER & CONTROL NODE IP 
+#Get physical_intf and ip address
 export PHYSIICAL_INTERFACE="$(sudo ip -4 route list 0/0 | awk '{ print $5; exit }')"
 export INTERFACE_IP_ADDRESS="$(ip addr show dev $PHYSIICAL_INTERFACE | grep "inet .*/.* brd " | awk '{print $2}' | cut -d '/' -f 1)"
+export DEFAULT_GATEWAY="$(sudo ip -4 route list 0/0 | awk '{ print $3; exit }')"
 export CONTROLLER_NODE="$(kubectl get pods -n kube-system -o wide | awk 'FNR ==2 {print $6; exit}')"
 export CONTROL_NODE=$INTERFACE_IP_ADDRESS
-export DEFAULT_GATEWAY="$(sudo ip -4 route list 0/0 | awk '{ print $3; exit }')"
 
-#Now deploy opencontrail charts
-cd $CHD_PATH
-make
 
-#Label nodes with contrail specific labels
-kubectl label node opencontrail.org/controller=enabled --all
-kubectl label node opencontrail.org/vrouter-kernel=enabled --all
-
-#Give cluster-admin permission for the user to create contrail pods
-kubectl replace -f rbac/cluster-admin.yaml
-
-#Populate the contrail-override-values.yaml file
 cat > /tmp/contrail.yaml << EOF
 # GLOBAL variables: which can be consumed by all charts
 # images, contrail_env, contrail_env_vrouter_dpdk, contrail_env_vrouter_kernel
@@ -74,7 +59,3 @@ global:
     PHYSICAL_INTERFACE: $PHYSIICAL_INTERFACE
     VROUTER_GATEWAY: $DEFAULT_GATEWAY
 EOF
-
-# Install contrail chart
-helm install --name contrail ${CHD_PATH}/contrail \
---namespace=contrail --values=/tmp/contrail.yaml

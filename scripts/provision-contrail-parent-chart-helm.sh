@@ -6,9 +6,9 @@ export OSH_PATH=${BASE_DIR}/openstack-helm
 export OSH_INFRA_PATH=${BASE_DIR}/openstack-helm-infra
 export CHD_PATH=${BASE_DIR}/contrail-helm-deployer
 
-## By Defualt latest OpenContrailNightly iamges will be used please change "laetst" to "ocata-master-XX" for specific release
-export CONTRAIL_REGISTRY=docker.io/opencontrailnightly
-export CONTAINER_TAG=latest
+## This script will use Contrail Internal Repo for per release Contrail Images download
+export CONTRAIL_REGISTRY=10.84.5.81:5000
+export CONTAINER_TAG=ocata-5.0-16
 
 
 ### Define Nodes names for K8s Labeling "opencontrail.org/controller", "opencontrail.org/vrouter-kernel" & "opencontrail.org/vrouter-dpdk"  #######
