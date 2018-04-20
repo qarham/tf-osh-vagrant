@@ -4,6 +4,14 @@ export OSH_CONTRAIL_NODE_01=10.13.82.237
 export OSH_CONTRAIL_NODE_02=10.13.82.238
 export OSH_CONTRAIL_NODE_03=10.13.82.239
 
+export OSH_CONTROLLER_01=k8s-node01
+export OSH_CONTROLLER_02=k8s-node02
+export OSH_CONTROLLER_03=k8s-node03
+
+export OSH_COMPUTE_01=k8s-node01
+export OSH_COMPUTE_02=k8s-node02
+export OSH_COMPUTE_03=k8s-node03
+
 ssh-keygen -t rsa -f /root/.ssh/id_rsa -q -P ""
 
 #sudo ssh-copy-id -i ~/.ssh/id_rsa.pub 10.13.82.237
@@ -86,12 +94,43 @@ kubernetes:
     cni: calico
     pod_subnet: 192.168.0.0/16
     domain: cluster.local
+
+docker:
+ insecure_registries:
+   - 10.84.5.81:5000
 EOF
 
 cd ${OSH_INFRA_PATH}
 make dev-deploy setup-host multinode 
 make dev-deploy k8s multinode 
 # sudo -H su -c 'cd /opt/openstack-helm-infra; make all'
+
+################ OpenStack Control and Compute Labeling ##############
+kubectl label node ${OSH_CONTROLLER_01} openstack-control-plane=enabled
+#kubectl label node ${OSH_CONTROLLER_02} openstack-control-plane=enabled
+#kubectl label node ${OSH_CONTROLLER_03} openstack-control-plane=enabled
+
+#kubectl label node ${OSH_COMPUTE_01} openstack-compute-node=enabled
+kubectl label node ${OSH_COMPUTE_02} openstack-compute-node=enabled
+kubectl label node ${OSH_COMPUTE_03} openstack-compute-node=enabled
+
+############ Disable OpenStack Controller label  ###########
+kubectl label node ${OSH_CONTROLLER_02} --overwrite openstack-control-plane=disabled
+kubectl label node ${OSH_CONTROLLER_03} --overwrite openstack-control-plane=disabled
+#kubectl label node ${OSH_CONTROLLER_02} --overwrite openstack-control-plane=enabled
+#kubectl label node ${OSH_CONTROLLER_03} --overwrite openstack-control-plane=enabled
+
+############ Disable OpenStack Compute label  ####################
+#kubectl label node ${OSH_COMPUTE_01} --overwrite openstack-compute-node=disabled
+#kubectl label node ${OSH_COMPUTE_02} --overwrite openstack-compute-node=disabled
+#kubectl label node ${OSH_COMPUTE_01} --overwrite openstack-compute-node=enabled
+#kubectl label node ${OSH_COMPUTE_02} --overwrite openstack-compute-node=enabled
+
+echo "**********  OpenStack Controller Nodes  ***************\n"
+kubectl get nodes -o wide -l openstack-control-plane=enabled
+
+echo "**********  OpenStack Compute Nodes ***************\n"
+kubectl get nodes -o wide -l openstack-compute-node=enabled
 
 
 ########## Test Kube-DN ###############
