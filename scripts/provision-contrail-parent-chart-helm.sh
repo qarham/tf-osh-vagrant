@@ -174,10 +174,10 @@ case $yn in
     [Nn]* ) echo "Aborting...."; exit;;
 esac
 
-echo ************** Installing OpenStack Heat with Contrail Heat Resoruces ****************
+echo ************** Installing OpenStack Heat with Contrail Heat Resoruces and Test Compute Kit ****************
 cd ${OSH_PATH}
 ./tools/deployment/multinode/151-heat-opencontrail.sh
-
+./tools/deployment/multinode/143-compute-kit-opencontrail-test.sh
 
 echo ****************** Monitoring Software Installation ********
 # Weavescope will create a separate Namespace called "weave" and use NodePort use "kubectl get svc -n weave" for NodePort number
