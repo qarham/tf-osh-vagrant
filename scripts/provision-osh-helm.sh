@@ -47,16 +47,15 @@ cd ${OSH_PATH}
 ./tools/deployment/developer/common/000-install-packages.sh
 ./tools/deployment/developer/common/001-install-packages-opencontrail.sh
 
-line_to_rep_orig="      port: 9091"
-line_to_rep_new="      port: 9099"
-sudo sed -n "1h;2,\$H;\${g;s/$line_to_rep_orig/$line_to_rep_new/;p}" /opt/openstack-helm-infra/calico/values.yaml > /tmp/calcio-values.yaml
-sudo mv /tmp/calcio-values.yaml /opt/openstack-helm-infra/calico/values.yaml
+#line_to_rep_orig="      port: 9091"
+#line_to_rep_new="      port: 9099"
+#sudo sed -n "1h;2,\$H;\${g;s/$line_to_rep_orig/$line_to_rep_new/;p}" /opt/openstack-helm-infra/calico/values.yaml > /tmp/calcio-values.yaml
+#sudo mv /tmp/calcio-values.yaml /opt/openstack-helm-infra/calico/values.yaml
 
-line_to_rep_orig="    FELIX_PROMETHEUSMETRICSPORT: \"9096\""
-line_to_rep_new="    FELIX_PROMETHEUSMETRICSPORT: \"9099\""
-sudo sed -n "1h;2,\$H;\${g;s/$line_to_rep_orig/$line_to_rep_new/;p}" /opt/openstack-helm-infra/calico/values.yaml > /tmp/calcio-values.yaml
-sudo mv /tmp/calcio-values.yaml /opt/openstack-helm-infra/calico/values.yaml
-
+#line_to_rep_orig="    FELIX_PROMETHEUSMETRICSPORT: \"9096\""
+#line_to_rep_new="    FELIX_PROMETHEUSMETRICSPORT: \"9099\""
+#sudo sed -n "1h;2,\$H;\${g;s/$line_to_rep_orig/$line_to_rep_new/;p}" /opt/openstack-helm-infra/calico/values.yaml > /tmp/calcio-values.yaml
+#sudo mv /tmp/calcio-values.yaml /opt/openstack-helm-infra/calico/values.yaml
 
 ## Create Ansible Inventory ###########
 cat > /opt/openstack-helm-infra/tools/gate/devel/multinode-inventory.yaml <<EOF
@@ -106,13 +105,13 @@ make dev-deploy k8s multinode
 # sudo -H su -c 'cd /opt/openstack-helm-infra; make all'
 
 ################ OpenStack Control and Compute Labeling ##############
-kubectl label node ${OSH_CONTROLLER_01} openstack-control-plane=enabled
+#kubectl label node ${OSH_CONTROLLER_01} openstack-control-plane=enabled
 #kubectl label node ${OSH_CONTROLLER_02} openstack-control-plane=enabled
 #kubectl label node ${OSH_CONTROLLER_03} openstack-control-plane=enabled
 
 #kubectl label node ${OSH_COMPUTE_01} openstack-compute-node=enabled
-kubectl label node ${OSH_COMPUTE_02} openstack-compute-node=enabled
-kubectl label node ${OSH_COMPUTE_03} openstack-compute-node=enabled
+#kubectl label node ${OSH_COMPUTE_02} openstack-compute-node=enabled
+#kubectl label node ${OSH_COMPUTE_03} openstack-compute-node=enabled
 
 ############ Disable OpenStack Controller label  ###########
 kubectl label node ${OSH_CONTROLLER_02} --overwrite openstack-control-plane=disabled
@@ -121,7 +120,7 @@ kubectl label node ${OSH_CONTROLLER_03} --overwrite openstack-control-plane=disa
 #kubectl label node ${OSH_CONTROLLER_03} --overwrite openstack-control-plane=enabled
 
 ############ Disable OpenStack Compute label  ####################
-#kubectl label node ${OSH_COMPUTE_01} --overwrite openstack-compute-node=disabled
+kubectl label node ${OSH_COMPUTE_01} --overwrite openstack-compute-node=disabled
 #kubectl label node ${OSH_COMPUTE_02} --overwrite openstack-compute-node=disabled
 #kubectl label node ${OSH_COMPUTE_01} --overwrite openstack-compute-node=enabled
 #kubectl label node ${OSH_COMPUTE_02} --overwrite openstack-compute-node=enabled
