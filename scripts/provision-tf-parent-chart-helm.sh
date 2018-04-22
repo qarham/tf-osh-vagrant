@@ -18,6 +18,7 @@ export CONTRAIL_CONTROLLER_NODE_03=k8s-node03
 
 export CONTRAIL_COMPUTE_KERNEL_01=k8s-node01
 export CONTRAIL_COMPUTE_KERNEL_02=k8s-node02
+export CONTRAIL_COMPUTE_KERNEL_02=k8s-node03
 
 #export CONTRAIL_COMPUTE_DPDK_01=k8s-node03
 #export CONTRAIL_COMPUTE_DPDK_02=k8s-node04
@@ -56,7 +57,7 @@ make
 kubectl replace -f ${CHD_PATH}/rbac/cluster-admin.yaml
 
 ############## Label Contrail Nodes ###################################
-kubectl label node ${CONTRAIL_COMPUTE_KERNEL_01} ${CONTRAIL_COMPUTE_KERNEL_02} opencontrail.org/vrouter-kernel=enabled
+kubectl label node ${CONTRAIL_COMPUTE_KERNEL_01} ${CONTRAIL_COMPUTE_KERNEL_02} ${CONTRAIL_COMPUTE_KERNEL_03} opencontrail.org/vrouter-kernel=enabled
 #kubectl label node ${CONTRAIL_COMPUTE_DPDK_01} opencontrail.org/vrouter-dpdk=enabled
 kubectl label nodes ${CONTRAIL_CONTROLLER_NODE_01} ${CONTRAIL_CONTROLLER_NODE_02} ${CONTRAIL_CONTROLLER_NODE_03} opencontrail.org/controller=enabled
 

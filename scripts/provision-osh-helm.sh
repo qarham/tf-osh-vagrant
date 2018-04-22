@@ -114,13 +114,13 @@ make dev-deploy k8s multinode
 #kubectl label node ${OSH_COMPUTE_03} openstack-compute-node=enabled
 
 ############ Disable OpenStack Controller label  ###########
-kubectl label node ${OSH_CONTROLLER_02} --overwrite openstack-control-plane=disabled
-kubectl label node ${OSH_CONTROLLER_03} --overwrite openstack-control-plane=disabled
+#kubectl label node ${OSH_CONTROLLER_02} --overwrite openstack-control-plane=disabled
+#kubectl label node ${OSH_CONTROLLER_03} --overwrite openstack-control-plane=disabled
 #kubectl label node ${OSH_CONTROLLER_02} --overwrite openstack-control-plane=enabled
 #kubectl label node ${OSH_CONTROLLER_03} --overwrite openstack-control-plane=enabled
 
 ############ Disable OpenStack Compute label  ####################
-kubectl label node ${OSH_COMPUTE_01} --overwrite openstack-compute-node=disabled
+#kubectl label node ${OSH_COMPUTE_01} --overwrite openstack-compute-node=disabled
 #kubectl label node ${OSH_COMPUTE_02} --overwrite openstack-compute-node=disabled
 #kubectl label node ${OSH_COMPUTE_01} --overwrite openstack-compute-node=enabled
 #kubectl label node ${OSH_COMPUTE_02} --overwrite openstack-compute-node=enabled

@@ -16,12 +16,12 @@ openstack network list
 echo ######### Create Two VMs VM-01 & VM-02 on two separet compute ###########
 openstack server create --flavor m1.tiny --image 'Cirros 0.3.5 64-bit' \
     --nic net-id=MGMT-VN \
-    --availability-zone nova:k8s-node01 \
+    --availability-zone nova:k8s-node02 \
 VM-01
 
 openstack server create --flavor m1.tiny --image 'Cirros 0.3.5 64-bit' \
     --nic net-id=MGMT-VN \
-    --availability-zone nova:k8s-node02 \
+    --availability-zone nova:k8s-node03 \
 VM-02
 
 sleep 30
