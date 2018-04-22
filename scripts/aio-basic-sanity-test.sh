@@ -22,7 +22,7 @@ openstack server create --flavor m1.tiny --image 'Cirros 0.3.5 64-bit' \
     --nic net-id=MGMT-VN \
 VM-02
 
-Sleep 30
+sleep 30
 
 echo ********** List Created Virtual Network
 openstack network list
