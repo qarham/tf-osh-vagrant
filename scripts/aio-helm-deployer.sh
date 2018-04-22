@@ -108,3 +108,7 @@ helm install --name contrail ${CHD_PATH}/contrail \
 # Deploying heat charts after contrail charts are deployed as they have dependency on contrail charts
 cd ${OSH_PATH}
 ./tools/deployment/developer/nfs/091-heat-opencontrail.sh
+./tools/deployment/multinode/143-compute-kit-opencontrail-test.sh
+
+echo ************** OpenStack Helm and Contrail Installation Completed ****************
+

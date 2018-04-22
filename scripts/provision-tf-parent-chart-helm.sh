@@ -177,6 +177,7 @@ esac
 echo ************** Installing OpenStack Heat with Contrail Heat Resoruces ****************
 cd ${OSH_PATH}
 ./tools/deployment/multinode/151-heat-opencontrail.sh
+./tools/deployment/multinode/143-compute-kit-opencontrail-test.sh
 
 
 echo ****************** Monitoring Software Installation ********
