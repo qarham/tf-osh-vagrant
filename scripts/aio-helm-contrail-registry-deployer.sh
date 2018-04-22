@@ -12,7 +12,7 @@ export OSH_PATH=${BASE_DIR}/openstack-helm
 export OSH_INFRA_PATH=${BASE_DIR}/openstack-helm-infra
 export CHD_PATH=${BASE_DIR}/contrail-helm-deployer
 
-export CONTRAIL_REGISTRY=docker.io/opencontrailnightly
+export CONTRAIL_REGISTRY=10.84.5.81:5000
 export CONTAINER_TAG=latest
 
 cd ${OSH_PATH}

@@ -8,7 +8,7 @@ export CHD_PATH=${BASE_DIR}/contrail-helm-deployer
 
 ## This script will use Contrail Internal Repo for per release Contrail Images download
 export CONTRAIL_REGISTRY=10.84.5.81:5000
-export CONTAINER_TAG=ocata-5.0-16
+export CONTAINER_TAG=latest
 
 
 ### Define Nodes names for K8s Labeling "opencontrail.org/controller", "opencontrail.org/vrouter-kernel" & "opencontrail.org/vrouter-dpdk"  #######
