@@ -62,6 +62,7 @@ kubectl label node ${CONTRAIL_COMPUTE_KERNEL_01} ${CONTRAIL_COMPUTE_KERNEL_02} $
 kubectl label nodes ${CONTRAIL_CONTROLLER_NODE_01} ${CONTRAIL_CONTROLLER_NODE_02} ${CONTRAIL_CONTROLLER_NODE_03} opencontrail.org/controller=enabled
 
 echo "**********  Contrail Controller Nodes  ***************\n"
+# kubectl get nodes --show-labels
 kubectl get nodes -o wide -l opencontrail.org/controller=enabled
 
 echo "**********  Contrail Compute Nodes with vrouter-kernel ***************\n"
